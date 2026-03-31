@@ -54,9 +54,9 @@ mini-chat-ajax/
 │   ├── login.php        # Page de connexion
 │   ├── register.php     # Page d'inscription
 │   ├── logout.php       # Déconnexion
+│   ├── enregistrer.php  # Script PHP pour envoyer un message
 │   └── script.js        # Logique JavaScript (Ajax / jQuery)
-├── src/                 # Code source PHP (logique métier)
-│   └── DBConnection.php # Singleton de connexion PDO
+├── DBConnection.php     # Singleton de connexion PDO
 ├── config.sample.php    # Exemple de configuration
 ├── schema.sql           # Schéma de la base de données
 └── README.md

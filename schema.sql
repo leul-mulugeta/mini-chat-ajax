@@ -5,7 +5,8 @@ CREATE TABLE message (
 	message_id int AUTO_INCREMENT PRIMARY KEY,
 	date_heure datetime NOT NULL,
 	auteur varchar(50) NOT NULL,
-	contenu varchar(3000) NOT NULL
+	contenu varchar(3000) NOT NULL,
+	INDEX (date_heure)
 );
 
 CREATE TABLE user (

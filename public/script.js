@@ -38,7 +38,6 @@ function enregistrer() {
         { auteur: pseudo, message: message },
         function (response) {
             if (response.success) {
-                alert("Message envoyé.");
                 $("#message").val("");
             } else {
                 alert("Erreur réseau ou serveur. Veuillez réessayer.");
@@ -53,3 +52,37 @@ function enregistrer() {
             btn.prop("disabled", false).text("Envoyer");
         });
 }
+
+// Mémorise le dernier message affiché pour ne pas recharger tout l'historique
+let lastDisplayedId = 0;
+
+setInterval(function () {
+    $.getJSON("recuperer.php", function (response) {
+        if (response.success) {
+            const historique = $("#historique");
+
+            // Créer les éléments HTML
+            response.data.forEach((message) => {
+                // Filtre pour n'ajouter que les messages que l'utilisateur n'a pas encore vus
+                if (message.messageId > lastDisplayedId) {
+                    const isMe = message.auteur === $("#pseudo").text().trim();
+
+                    // Construit la bulle de message
+                    const div = $("<div>").addClass("message").toggleClass("me", isMe);
+                    const content = $("<p>").text(message.contenu);
+                    const meta = $("<p>").text(`${message.auteur} - ${message.dateHeure}`);
+
+                    historique.append(div.append(content, meta));
+                    lastDisplayedId = message.messageId;
+
+                    // Scrolle automatiquement vers le bas à chaque nouveau message
+                    historique.scrollTop(historique[0].scrollHeight);
+                }
+            });
+        } else {
+            console.error("Erreur réseau ou serveur. Veuillez réessayer.");
+        }
+    }).fail(function () {
+        console.error("Erreur de récupération des messages.");
+    });
+}, 2000);

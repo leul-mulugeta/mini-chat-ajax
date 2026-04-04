@@ -23,12 +23,18 @@ $username = htmlspecialchars($_SESSION['username']);
 </head>
 
 <body>
-    <header><button><a href="logout.php">Déconnexion</a></button></header>
+    <header>
+        <p>Mon Pseudo : <span id="pseudo"><strong><?php echo $username ?></strong></span></p>
+        <a href="logout.php" class="btn-logout">Déconnexion</a>
+    </header>
 
-    <p>Mon Pseudo : <span id="pseudo"><strong><?php echo $username ?></strong></span></p>
-    <div id="historique"></div>
-    <input type="text" id="message" name="message" placeholder="Saisissez votre message" autocomplete="off" />
-    <button type="button" id="btn-enregistrer" onclick="enregistrer()">Envoyer</button>
+    <main id="historique">
+    </main>
+
+    <form class="formulaire-message" onsubmit="event.preventDefault(); enregistrer();">
+        <input type="text" id="message-input" name="message" placeholder="Saisissez votre message" required autocomplete="off" />
+        <button type="submit" id="btn-enregistrer">Envoyer</button>
+    </form>
 </body>
 
 </html>

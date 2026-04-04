@@ -63,12 +63,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 				<button type="submit" id="btn-connecter">Créer un compte</button>
 			</form>
-			<button class="toggle-link"><a href="login.php">Se connecter</a></button>
 			<?php if ($erreur) { ?>
 				<p class="erreur">
 					<?= $erreur ?>
 				</p>
 			<?php } ?>
+			<a href="login.php" class="toggle-link">Se connecter</a>
 		</div>
 	</div>
 </body>

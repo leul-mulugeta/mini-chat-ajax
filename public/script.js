@@ -1,13 +1,8 @@
-$("#message").keyup(function (event) {
-    if (event.keyCode === 13) {
-        enregistrer();
-    }
-});
-
 function enregistrer() {
     const btn = $("#btn-enregistrer");
-    const pseudo = $("#pseudo")[0].innerText;
-    const message = $("#message").val().trim();
+    const input = $("#message-input");
+    const pseudo = $("#pseudo").text().trim();
+    const message = input.val().trim();
 
     // Validations
     if (pseudo.length === 0) {
@@ -38,7 +33,7 @@ function enregistrer() {
         { auteur: pseudo, message: message },
         function (response) {
             if (response.success) {
-                $("#message").val("");
+                input.val("");
             } else {
                 alert("Erreur réseau ou serveur. Veuillez réessayer.");
             }
@@ -46,9 +41,10 @@ function enregistrer() {
         "json",
     )
         .fail(function () {
-            alert("Erreur réseau ou serveur. Veuillez réessayer.");
+            alert("Erreur réseau. Veuillez réessayer.");
         })
         .always(function () {
+            // Réactive le bouton peu importe le résultat de la requête
             btn.prop("disabled", false).text("Envoyer");
         });
 }

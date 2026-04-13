@@ -29,10 +29,6 @@ button {
     transition: background 0.2s;
 }
 
-button:hover {
-    background-color: #0056b3;
-}
-
 header {
     display: flex;
     justify-content: space-between;
@@ -49,10 +45,6 @@ header {
     border-radius: 4px;
     font-size: 14px;
     font-weight: bold;
-}
-
-.btn-logout:hover {
-    background-color: #c82333;
 }
 
 /* Zone de discussion */
@@ -87,7 +79,7 @@ header {
     margin: 0;
 }
 
-/* Mes messagse */
+/* Mes messages */
 .message.me {
     align-self: flex-end;
     background-color: #007bff;
@@ -137,7 +129,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 90vh;
+    min-height: 90dvh;
 }
 
 .boite-connexion {
@@ -197,10 +189,6 @@ header {
     font-size: 14px;
 }
 
-.toggle-link:hover {
-    text-decoration: underline;
-}
-
 .erreur {
     color: #dc3545;
     background-color: #f8d7da;
@@ -209,4 +197,86 @@ header {
     margin-top: 20px;
     border-radius: 4px;
     font-size: 14px;
+}
+
+/* Gestion du survol pour les écrans tactiles */
+@media (hover: hover) {
+    button:hover {
+        background-color: #0056b3;
+    }
+    .btn-logout:hover {
+        background-color: #c82333;
+    }
+    .toggle-link:hover {
+        text-decoration: underline;
+    }
+}
+
+/* Ajustements responsifs */
+@media (max-width: 1024px) {
+    body {
+        margin: 15px;
+        font-size: 17px;
+    }
+
+    #historique {
+        height: calc(100dvh - 200px);
+        min-height: 350px;
+    }
+
+    .boite-connexion {
+        padding: 25px;
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        margin: 10px;
+        font-size: 16px;
+    }
+
+    header {
+        flex-direction: row;
+        gap: 5px;
+        font-size: 14px;
+    }
+
+    .btn-logout {
+        padding: 5px 10px;
+        font-size: 12px;
+        white-space: nowrap;
+    }
+
+    #historique {
+        height: calc(100dvh - 180px);
+        min-height: 300px;
+    }
+
+    .message {
+        max-width: 85%;
+    }
+
+    .formulaire-message {
+        flex-direction: row;
+    }
+
+    #btn-enregistrer {
+        padding: 10px 15px;
+    }
+
+    .boite-connexion {
+        padding: 20px;
+        max-width: 90%;
+    }
+}
+
+/* Gestion du mode paysage et des petits écrans */
+@media (max-height: 450px) and (orientation: landscape) {
+    #historique {
+        height: 150px;
+        min-height: 150px;
+    }
+    body {
+        margin: 5px 10px;
+    }
 }

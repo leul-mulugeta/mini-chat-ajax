@@ -1,7 +1,5 @@
 # 💬 Mini-Chat-Ajax
 
-> 🚧 **Projet en cours de développement**
-
 ## 🛠️ Présentation
 **Mini-Chat-Ajax** est une application de messagerie instantanée légère. Elle permet aux utilisateurs de créer un compte, de se connecter et d'échanger des messages en temps réel via une interface web, en utilisant les technologies **Ajax** et la librairie **jQuery** pour interagir avec un serveur PHP/MySQL.
 
@@ -13,30 +11,40 @@
 
 ## ⚙️ Installation et Configuration
 
-1. **Cloner le projet** :
-   ```bash
-   git clone https://github.com/leul-mulugeta/mini-chat-ajax.git
-   cd mini-chat-ajax
-   ```
+### 🐳 Via Docker (Recommandé)
+**Docker s'occupe de tout** : installation de PHP, de MySQL, configuration des extensions et initialisation de la base de données avec des données de test.
+1. Renommez `config.sample.php` en `config.php`.
+2. Lancez le projet (voir section **Exécution** ci-dessous).
 
-2. **Base de données** :
-   Vous devez disposer d'un serveur MySQL (via **XAMPP**, **WAMP**, ou en ligne de commande).
-   - Créez une nouvelle base de données (ex: `mini-chat-ajax`) via `phpMyAdmin` ou en ligne de commande.
-   - Importez le fichier `schema.sql` pour créer la structure des tables.
-
-3. **Configuration** :
-   - Renommez le fichier `config.sample.php` en `config.php`.
-   - Modifiez ce fichier pour configurer vos accès à la base de données (Host, Nom, Utilisateur, Mot de passe).
+### 🛠️ Installation Manuelle (Serveur PHP & MySQL indépendant)
+Si vous n'utilisez pas Docker, vous devez configurer votre environnement manuellement :
+1. **Base de données** :
+   - Créez une base de données (ex: `mini-chat-ajax`).
+   - Importez `sql/schema.sql` pour créer les tables.
+   - *(Optionnel)* Importez `sql/data_test.sql` si vous souhaitez avoir des messages et utilisateurs de test.
+2. **Configuration** :
+   - Renommez `config.sample.php` en `config.php`.
+   - Modifiez `DB_HOST` pour `localhost` et renseignez vos identifiants MySQL locaux.
 
 ## 🚀 Exécution
 
-Vous avez deux options pour lancer l'application :
+### Option A : Docker Compose
+C'est la méthode la plus simple et recommandée. Elle configure automatiquement l'environnement.
+- **Lancer / Redémarrer** : `docker compose up --build`
+- **Arrêter** : `docker compose down`
+- **Réinitialiser (effacer la base de données)** : `docker compose down -v`
 
-### Option A : Serveur Web (XAMPP / Apache)
+> **Note sur les données de test** : Par défaut, Docker injecte `sql/data_test.sql`. Pour l'enlever, supprimez ou commentez la ligne correspondante dans le fichier `compose.yaml` avant de lancer le projet.
+
+Accédez ensuite à l'application via `http://localhost:8000`.
+
+### Option B : Serveur Web (XAMPP / Apache)
 - Placez le dossier du projet dans votre répertoire `htdocs` ou `www`.
+- Importez le schéma SQL situé dans `sql/schema.sql`.
+- Créez votre fichier `config.php` avec vos accès locaux.
 - Accédez à l'application via `http://localhost/mini-chat-ajax/public/`.
 
-### Option B : Serveur intégré PHP
+### Option C : Serveur intégré PHP
 - Ouvrez un terminal à la racine du projet.
 - Lancez la commande suivante :
   ```bash
@@ -57,9 +65,13 @@ mini-chat-ajax/
 │   ├── enregistrer.php  # Script PHP pour envoyer un message
 │   ├── recuperer.php    # Script PHP pour récupérer les messages
 │   └── script.js        # Logique JavaScript (Ajax / jQuery)
+├── sql/                 # Scripts d'initialisation de la base de données
+│   ├── schema.sql       # Structure des tables
+│   └── data_test.sql    # Données de test
 ├── DBConnection.php     # Singleton de connexion PDO
 ├── config.sample.php    # Exemple de configuration
-├── schema.sql           # Schéma de la base de données
+├── Dockerfile           # Configuration de l'image PHP
+├── compose.yaml         # Orchestration des conteneurs
 └── README.md
 ```
 

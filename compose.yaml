@@ -1,0 +1,35 @@
+services:
+    db:
+        image: mysql:8.0
+        container_name: mini-chat-ajax-db
+        restart: always
+        environment:
+            MYSQL_DATABASE: mini-chat-ajax
+            MYSQL_ROOT_PASSWORD: password
+        command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+        ports:
+            - "3306:3306"
+        volumes:
+            - ./sql/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql
+            - ./sql/data_test.sql:/docker-entrypoint-initdb.d/02_data_test.sql
+            - db_data:/var/lib/mysql
+        healthcheck:
+            test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-ppassword"]
+            interval: 5s
+            timeout: 5s
+            retries: 10
+    web:
+        build: .
+        restart: always
+        ports:
+            - "8000:8000"
+        volumes:
+            - ./public:/usr/src/myapp/public
+            - ./config.php:/usr/src/myapp/config.php
+            - ./DBConnection.php:/usr/src/myapp/DBConnection.php
+        depends_on:
+            db:
+                condition: service_healthy
+
+volumes:
+    db_data:

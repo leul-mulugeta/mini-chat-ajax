@@ -3,6 +3,13 @@
 ## 🛠️ Présentation
 **Mini-Chat-Ajax** est une application de messagerie instantanée légère. Elle permet aux utilisateurs de créer un compte, de se connecter et d'échanger des messages en temps réel via une interface web, en utilisant les technologies **Ajax** et la librairie **jQuery** pour interagir avec un serveur PHP/MySQL.
 
+**🌐 [Démo en ligne](https://mini-chat-ajax.alwaysdata.net/)**
+
+**Comptes de test :**
+- **Alice** / Alice
+- **Bob** / Bob
+- **Charlie** / Charlie
+
 ## 💻 Stack Technique
 - **Frontend** : HTML5, CSS3, JavaScript
 - **Librairie** : jQuery
